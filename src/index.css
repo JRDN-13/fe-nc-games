@@ -30,24 +30,30 @@ h1 {
 }
 
 h2 {
-  padding: 10px;
+  font-size: 30px;
+  padding: 20px;
+}
+
+h3 {
+  padding: 8px;
 }
 
 /* NAVBAR */
 .navBar {
   padding: 10px;
   background-color: darkslategray;
+  margin-bottom: 50px;
 }
 
 .navBar a {
   text-decoration: none;
-  padding: 5px;
+  padding: 5px 15px;
   font-size: 20px;
   color: white;
 }
 
-.navBar {
-  margin-bottom: 50px;
+.navBar a:hover {
+  opacity: 0.5;
 }
 
 .navBar-list {
@@ -78,6 +84,19 @@ h2 {
   list-style: none;
 }
 
+.reviews-card a {
+  text-decoration: none;
+  color: white;
+}
+
+.reviews-card h3:hover {
+  opacity: 0.5;
+}
+
+.reviews-card img:hover {
+  opacity: 0.5;
+}
+
 .reviews-card p {
   font-size: 14px;
   padding-bottom: 10px;
@@ -99,4 +118,26 @@ h2 {
   justify-content: space-between;
 }
 
+/* SINGLE REVIEW */
 
+.single-review-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  padding: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.single-review-card p {
+  padding: 5px;
+}
+
+.single-review-card-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
