@@ -22,16 +22,13 @@ function SingleReview() {
     <div className="single-review-card">
       <h2>{currentReview.title}</h2>
       <img
-        className=""
+        className="single-review-card-img"
         src={currentReview.review_img_url}
         alt={currentReview.title}
       />
-      <p>
-        Designed by <em>{currentReview.designer}</em>
-      </p>
-      <p>{currentReview.owner}</p>
+      <h3>REVIEW</h3>
       <p>{currentReview.review_body}</p>
-      <p>{currentReview.votes}</p>
+      <p>VOTES: {currentReview.votes}</p>
     </div>
   );
 }
