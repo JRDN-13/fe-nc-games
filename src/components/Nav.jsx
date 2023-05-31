@@ -5,8 +5,7 @@ function Nav() {
     <>
       <nav className="navBar">
         <ul className="navBar-list">
-          <li>Home</li>
-          <li>Reviews</li>
+          <Link to="/">Reviews</Link>
           <li>Categoroies</li>
           <li>Users</li>
         </ul>

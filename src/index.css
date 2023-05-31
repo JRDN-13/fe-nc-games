@@ -30,7 +30,12 @@ h1 {
 }
 
 h2 {
-  padding: 10px;
+  font-size: 35px;
+  padding: 20px;
+}
+
+h3 {
+  padding: 8px;
 }
 
 /* NAVBAR */

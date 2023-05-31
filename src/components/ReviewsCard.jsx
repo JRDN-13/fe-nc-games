@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function ReviewsCard({ review }) {
   const {
@@ -11,11 +12,16 @@ function ReviewsCard({ review }) {
     comment_count,
   } = review;
 
+  function handleClick() {
+    setCurrentReviews();
+  }
+
   return (
     <ul className="reviews-card" key={review_id}>
-      <li>
-        <h2>{title}</h2>
-        <img className="reviews-image" src={review_img_url} alt={title} />
+      <Link to={`reviews/${review.review_id}`}>
+        <h3>{title}</h3>
+        <img className="reviews-image" src={review_img_url} alt={title} onClick={handleClick}/>
+      </Link>
         <section className="reviews-details">
           <p>
             Designed by <em>{designer}</em>
@@ -24,7 +30,6 @@ function ReviewsCard({ review }) {
           <p>VOTES: {votes}</p>
           <p>{comment_count} comment(s)</p>
         </section>
-      </li>
     </ul>
   );
 }

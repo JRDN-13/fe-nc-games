@@ -9,3 +9,9 @@ export function fetchReviews() {
         return results
     })
 }
+
+export function fetchReviewsById(review_id) {
+    return gamesApi.get(`reviews/${review_id}`).then((results) => {
+        return results.data
+    })
+}
