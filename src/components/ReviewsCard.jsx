@@ -23,10 +23,6 @@ function ReviewsCard({ review }) {
           Designed by <em>{designer}</em>
         </p>
         <p>category: {category}</p>
-        <section className="votes-container">
-          <button>△</button> {votes} vote(s)
-          <button>▽</button>
-        </section>
         <p>{comment_count} comment(s)</p>
       </section>
     </ul>

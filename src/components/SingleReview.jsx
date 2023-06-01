@@ -6,6 +6,7 @@ function SingleReview() {
   const [currentReview, setCurrentReview] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [currentComments, setCurrentComments] = useState([]);
+  const [nocomment, setNocomment] = useState("");
   const { review_id } = useParams();
 
   useEffect(() => {
@@ -21,7 +22,7 @@ function SingleReview() {
 
   function handleClick() {
     fetchCommentsByReviewId(review_id).then((results) => {
-      console.log(results.comments);
+      if (results.comments.length === 0) setNocomment("No comments");
       setCurrentComments(results.comments);
     });
   }
@@ -39,17 +40,14 @@ function SingleReview() {
       <p>
         by <em>{currentReview.owner}</em>
       </p>
-      <section className="votes-container">
-        <button>△</button> {currentReview.votes} vote(s)
-        <button>▽</button>
-      </section>
       <button onClick={handleClick}>Click to view comment(s)</button>
+      {nocomment && <p>{nocomment}</p>}
       {currentComments.map((comment) => (
         <section key={comment.comment_id}>
           <p>
-            {comment.body}
+            {comment.body}{" "}
             <span className="author-text">
-              by{" "}
+              {" "}
               <em>
                 {comment.author}{" "}
                 {new Date(comment.created_at).toLocaleTimeString()}{" "}
