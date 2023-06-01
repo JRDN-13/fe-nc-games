@@ -1,10 +1,13 @@
 import { useParams } from "react-router-dom";
-import { fetchReviewsById } from "../Api";
+import { fetchCommentsByReviewId, fetchReviewsById } from "../Api";
 import { useState, useEffect } from "react";
+import Comments from "./Comments";
 
 function SingleReview() {
   const [currentReview, setCurrentReview] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [currentComments, setCurrentComments] = useState([]);
+  const [nocomment, setNocomment] = useState("");
   const { review_id } = useParams();
 
   useEffect(() => {
@@ -18,8 +21,15 @@ function SingleReview() {
     return <p>Loading...</p>;
   }
 
+  function handleClick() {
+    fetchCommentsByReviewId(review_id).then((results) => {
+      if (results.comments.length === 0) setNocomment("No comments");
+      setCurrentComments(results.comments);
+    });
+  }
+
   return (
-    <div className="single-review-card">
+    <section className="single-review-card">
       <h2>{currentReview.title}</h2>
       <img
         className="single-review-card-img"
@@ -28,8 +38,15 @@ function SingleReview() {
       />
       <h3>REVIEW</h3>
       <p>{currentReview.review_body}</p>
-      <p>VOTES: {currentReview.votes}</p>
-    </div>
+      <p>
+        by <em>{currentReview.owner}</em>
+      </p>
+      <button onClick={handleClick}>Click to view comment(s)</button>
+      {nocomment && <p>{nocomment}</p>}
+      {currentComments.map((comment) => (
+       <Comments comment={comment} key={comment.comment_id}/>
+      ))}
+    </section>
   );
 }
 
