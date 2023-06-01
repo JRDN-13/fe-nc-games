@@ -21,3 +21,7 @@ export function fetchCommentsByReviewId(review_id) {
     return results.data;
   });
 }
+
+export function increaseVote(review_id, inc_votes) {
+  return gamesApi.patch(`reviews/${review_id}`, { inc_votes: inc_votes });
+}
