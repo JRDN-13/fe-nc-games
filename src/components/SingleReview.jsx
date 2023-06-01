@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { fetchCommentsByReviewId, fetchReviewsById } from "../Api";
 import { useState, useEffect } from "react";
+import Comments from "./Comments";
 
 function SingleReview() {
   const [currentReview, setCurrentReview] = useState({});
@@ -43,19 +44,7 @@ function SingleReview() {
       <button onClick={handleClick}>Click to view comment(s)</button>
       {nocomment && <p>{nocomment}</p>}
       {currentComments.map((comment) => (
-        <section key={comment.comment_id}>
-          <p>
-            {comment.body}{" "}
-            <span className="author-text">
-              {" "}
-              <em>
-                {comment.author}{" "}
-                {new Date(comment.created_at).toLocaleTimeString()}{" "}
-                {new Date(comment.created_at).toLocaleDateString()}
-              </em>
-            </span>
-          </p>
-        </section>
+       <Comments comment={comment} key={comment.comment_id}/>
       ))}
     </section>
   );
