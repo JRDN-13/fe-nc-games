@@ -4,6 +4,7 @@ import Nav from "./components/Nav";
 import Header from "./components/Header";
 import Reviews from "./components/Reviews";
 import SingleReview from "./components/SingleReview";
+import AddComment from "./components/AddComment";
 
 function App() {
   return (
