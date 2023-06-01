@@ -161,7 +161,7 @@ button {
   background-color: transparent;
   font-size: 14px;
   border: none;
-  color:  rgb(209, 168, 117);
+  color: rgb(209, 168, 117);
   cursor: pointer;
 }
 
@@ -169,9 +169,13 @@ button:hover {
   opacity: 0.5;
 }
 
+button:disabled {
+  color: grey;
+  opacity: 1;
+  cursor: default;
+}
+
 /* COMMENTS */
-
-
 
 .author-text {
   font-size: 12px;
