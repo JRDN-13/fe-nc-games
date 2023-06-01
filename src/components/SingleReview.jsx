@@ -12,6 +12,7 @@ function SingleReview() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentComments, setCurrentComments] = useState([]);
   const [nocomment, setNocomment] = useState("");
+  const [errMsg, setErrMsg] = useState("")
   const { review_id } = useParams();
   const [voteChange, setVoteChange] = useState(currentReview.votes);
   const [hasClicked, setHasClicked] = useState(false);
@@ -36,6 +37,7 @@ function SingleReview() {
 
   const handleUpVoteClick = () => {
     setVoteChange((currVote) => currVote + 1);
+    if (hasClicked === false) setErrMsg("Only 1 vote allowed!")
     setHasClicked(true);
     increaseVote(review_id, 1)
       .then(() => {
@@ -51,6 +53,7 @@ function SingleReview() {
 
   const handleDownVoteClick = () => {
     setVoteChange((currVote) => currVote - 1);
+    if (hasClicked === false) setErrMsg("Only 1 vote allowed!")
     setHasClicked(true);
     increaseVote(review_id, -1)
       .then(() => {
@@ -82,7 +85,7 @@ function SingleReview() {
           className="vote-btn"
           onClick={handleUpVoteClick}
           disabled={hasClicked}
-        >
+          >
           ▲
         </button>{" "}
         {currentReview.votes} vote(s)
@@ -94,6 +97,7 @@ function SingleReview() {
           ▼
         </button>
       </section>
+        {errMsg && <p className="err">{errMsg}</p>}
       <button onClick={handleClick}>Click to view comment(s)</button>
       {nocomment && <p>{nocomment}</p>}
       {currentComments.map((comment) => (
