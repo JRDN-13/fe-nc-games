@@ -6,6 +6,7 @@ import {
 } from "../Api";
 import { useState, useEffect } from "react";
 import Comments from "./Comments";
+import AddComment from "./AddComment";
 
 function SingleReview() {
   const [currentReview, setCurrentReview] = useState({});
@@ -16,6 +17,7 @@ function SingleReview() {
   const { review_id } = useParams();
   const [voteChange, setVoteChange] = useState(currentReview.votes);
   const [hasClicked, setHasClicked] = useState(false);
+  const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
     fetchReviewsById(review_id).then(({ review }) => {
@@ -25,13 +27,21 @@ function SingleReview() {
   }, [review_id]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
   }
 
   function handleClick() {
     fetchCommentsByReviewId(review_id).then((results) => {
       if (results.comments.length === 0) setNocomment("No comments");
       setCurrentComments(results.comments);
+      setShowComments(!showComments);
     });
   }
 
@@ -76,7 +86,9 @@ function SingleReview() {
         alt={currentReview.title}
       />
       <h3>REVIEW</h3>
-      <p>{currentReview.review_body}</p>
+      <blockquote className="blockquote">
+        {currentReview.review_body}
+      </blockquote>
       <p>
         by <em>{currentReview.owner}</em>
       </p>
@@ -87,8 +99,7 @@ function SingleReview() {
           disabled={hasClicked}
         >
           ▲
-        </button>
-       {" "}
+        </button>{" "}
         {currentReview.votes} vote(s)
         <button
           className="vote-btn"
@@ -99,13 +110,24 @@ function SingleReview() {
         </button>
       </section>
       {isError ? (
-          <p className="err">Something went wrong! please refresh and try again</p>
-        ) : null}
-      <button onClick={handleClick}>Click to view comment(s)</button>
-      {nocomment && <p>{nocomment}</p>}
-      {currentComments.map((comment) => (
-        <Comments comment={comment} key={comment.comment_id} />
-      ))}
+        <p className="err">
+          Something went wrong! please refresh and try again
+        </p>
+      ) : null}
+      <button onClick={handleClick}>
+        {showComments ? "Click to hide comment(s)" : "Click to view comment(s)"}
+      </button>
+
+      {showComments && (
+        <>
+          {nocomment && <p>{nocomment}</p>}
+          {currentComments.map((comment) => (
+            <Comments comment={comment} key={comment.comment_id} />
+          ))}
+        </>
+      )}
+      <h4>Add a comment below</h4>
+      <AddComment setComments={setCurrentComments} />
     </section>
   );
 }

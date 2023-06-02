@@ -25,3 +25,11 @@ export function fetchCommentsByReviewId(review_id) {
 export function increaseVote(review_id, inc_votes) {
   return gamesApi.patch(`reviews/${review_id}`, { inc_votes: inc_votes });
 }
+
+export function postComment(review_id, newComment) {
+  return gamesApi
+    .post(`reviews/${review_id}/comments`, newComment)
+    .then((results) => {
+      return results.data.comment;
+    });
+}

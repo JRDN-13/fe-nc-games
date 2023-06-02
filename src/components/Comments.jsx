@@ -1,9 +1,10 @@
 import React from "react";
 
 function Comments({ comment }) {
-  const { author, body, created_at, comment_id } = comment;
+  const { author, body, created_at} = comment;
+
   return (
-    <section className="comment-container" key={comment_id}>
+    <section className="comment-container">
       <p>
         {body}{" "}
         <span className="author-text">
