@@ -30,7 +30,6 @@ export function postComment(review_id, newComment) {
   return gamesApi
     .post(`reviews/${review_id}/comments`, newComment)
     .then((results) => {
-      console.log(results.data)
       return results.data.comment;
     });
 }

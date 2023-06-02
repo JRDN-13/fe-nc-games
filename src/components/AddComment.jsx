@@ -12,6 +12,7 @@ const AddComment = ({ setComments }) => {
   const [usernameCommentErr, setUsernameCommentErr] = useState(false);
   const [bodyCommentErr, setBodyCommentErr] = useState(false);
   const [postSuccess, setPostSuccess] = useState(false);
+  const [isError, setIsError] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,10 +36,14 @@ const AddComment = ({ setComments }) => {
       !usernameCommentErr &&
       !bodyCommentErr
     ) {
-      postComment(review_id, newComment).then((commentFromAPI) => {
-        setComments((currComment) => [...currComment, commentFromAPI ]);
-        setPostSuccess(true);
-      });
+      postComment(review_id, newComment)
+        .then((commentFromAPI) => {
+          setComments((currComment) => [...currComment, commentFromAPI]);
+          setPostSuccess(true);
+        })
+        .catch(() => {
+          setIsError(true);
+        });
     }
     setNewComment({
       username: "",
@@ -81,6 +86,11 @@ const AddComment = ({ setComments }) => {
           setNewComment({ ...newComment, body: event.target.value });
         }}
       ></textarea>
+      {isError ? (
+        <p className="err">
+          Something went wrong! please refresh and try again
+        </p>
+      ) : null}
       {usernameBlankCommentErr && (
         <p className="err">Username cannot be empty</p>
       )}
