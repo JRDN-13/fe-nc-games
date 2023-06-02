@@ -2,8 +2,6 @@ import React from "react";
 
 function Comments({ comment }) {
   const { author, body, created_at} = comment;
-  console.log(comment,"comment")
-  console.log(comment.comment_id,"comment_id")
 
   return (
     <section className="comment-container">

@@ -36,7 +36,7 @@ const AddComment = ({ setComments }) => {
       !bodyCommentErr
     ) {
       postComment(review_id, newComment).then((commentFromAPI) => {
-        setComments((currComment) => [...currComment, commentFromAPI]);
+        setComments((currComment) => [...currComment, commentFromAPI ]);
         setPostSuccess(true);
       });
     }
