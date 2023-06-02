@@ -8,13 +8,54 @@ const AddComment = ({ setComments }) => {
     username: "",
     body: "",
   });
+  const [usernameBlankCommentErr, setUsernameBlankCommentErr] = useState(false);
+  const [usernameCommentErr, setUsernameCommentErr] = useState(false);
+  const [bodyCommentErr, setBodyCommentErr] = useState(false);
+  const [postSuccess, setPostSuccess] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setUsernameBlankCommentErr(false);
+    setUsernameCommentErr(false);
+    setBodyCommentErr(false);
+    setPostSuccess(!setPostSuccess);
 
-    postComment(review_id, newComment).then((commentFromAPI) => {
-      setComments((currComment) => [...currComment, commentFromAPI]);
+    const { username, body } = newComment;
+
+    if (username.trim().length === 0) {
+      setUsernameBlankCommentErr(true);
+    } else if (!isValidUsername(username)) {
+      setUsernameCommentErr(true);
+    }
+
+    if (body.trim().length === 0) {
+      setBodyCommentErr(true);
+    } else if (
+      !usernameBlankCommentErr &&
+      !usernameCommentErr &&
+      !bodyCommentErr
+    ) {
+      postComment(review_id, newComment).then((commentFromAPI) => {
+        setComments((currComment) => [...currComment, commentFromAPI]);
+        setPostSuccess(true);
+      });
+    }
+    setNewComment({
+      username: "",
+      body: "",
     });
+  };
+
+  const isValidUsername = (username) => {
+    const validUsernames = [
+      "tickle122",
+      "grumpy19",
+      "happyamy2016",
+      "cooljmessy",
+      "weegembump",
+      "jessjelly",
+    ];
+    return validUsernames.includes(username);
   };
 
   return (
@@ -40,6 +81,13 @@ const AddComment = ({ setComments }) => {
           setNewComment({ ...newComment, body: event.target.value });
         }}
       ></textarea>
+      {usernameBlankCommentErr && (
+        <p className="err">Username cannot be empty</p>
+      )}
+
+      {usernameCommentErr && <p className="err">Invalid username</p>}
+      {bodyCommentErr && <p className="err">Comment field cannot be empty</p>}
+      {!postSuccess ? null : <p className="success">Post added</p>}
       <button>Add</button>
     </form>
   );

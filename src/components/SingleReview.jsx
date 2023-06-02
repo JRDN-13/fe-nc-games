@@ -27,7 +27,14 @@ function SingleReview() {
   }, [review_id]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
   }
 
   function handleClick() {
