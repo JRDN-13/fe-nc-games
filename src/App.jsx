@@ -4,7 +4,8 @@ import Nav from "./components/Nav";
 import Header from "./components/Header";
 import Reviews from "./components/Reviews";
 import SingleReview from "./components/SingleReview";
-import AddComment from "./components/AddComment";
+import Categories from "./components/Categories";
+import Users from "./components/Users";
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Reviews />} />
-        <Route path="/reviews" element={<Reviews />} />
         <Route path="reviews/:review_id" element={<SingleReview />} />
+        <Route path="categories" element={<Categories/>} />
+        <Route path="users" element={<Users />} />
       </Routes>
     </BrowserRouter>
   );

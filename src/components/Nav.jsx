@@ -6,8 +6,8 @@ function Nav() {
       <nav className="navBar">
         <ul className="navBar-list">
           <Link to="/">Home</Link>
-          <li>Categories</li>
-          <li>Users</li>
+          <Link to="/categories">Categories</Link>
+          <Link to="/users">Users</Link>
         </ul>
       </nav>
     </>
