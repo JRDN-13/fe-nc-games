@@ -33,3 +33,15 @@ export function postComment(review_id, newComment) {
       return results.data.comment;
     });
 }
+
+export function fetchCategories() {
+  return gamesApi.get(`categories`).then((results) => {
+    return results.data.categories
+  });
+}
+
+export function fetchUsers() {
+  return gamesApi.get(`users`).then((results) => {
+    return results.data.users
+  });
+}

@@ -5,6 +5,7 @@ function ReviewsCard({ review }) {
   const { review_id, review_img_url, title, designer, category } = review;
 
   return (
+
     <ul className="reviews-card" key={review_id}>
       <Link to={`reviews/${review_id}`}>
         <h3>{title}</h3>
